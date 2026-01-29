@@ -114,23 +114,33 @@ public struct WZPeriodPicker: View {
 
     // Use system locale for month names and year formatting
     private func localizedMonthName(for month: Int) -> String {
+        let calendar = Calendar.current
+        var comps = DateComponents()
+        comps.month = month
+        comps.year = 2000
+        guard let date = calendar.date(from: comps) else { return "\(month)" }
+        let locale = Locale.current
+        let template = "MMMM" // full month name in locale
+        let format = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: locale) ?? "MMMM"
         let df = DateFormatter()
-        df.locale = Locale.current
-        if let symbols = df.monthSymbols {
-            let idx = month - 1
-            guard idx >= 0 && idx < symbols.count else { return String(month) }
-            return symbols[idx]
-        }
-        else {
-            return "\(month)"
-        }
+        df.locale = locale
+        df.dateFormat = format
+        return df.string(from: date)
     }
 
     private func formattedYear(_ year: Int) -> String {
-        let nf = NumberFormatter()
-        nf.locale = Locale.current
-        nf.maximumFractionDigits = 0
-        return nf.string(from: NSNumber(value: year)) ?? String(year)
+        let calendar = Calendar.current
+        var comps = DateComponents()
+        comps.year = year
+        comps.month = 1
+        guard let date = calendar.date(from: comps) else { return String(year) }
+        let locale = Locale.current
+        let template = "y" // year representation in locale
+        let format = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: locale) ?? "y"
+        let df = DateFormatter()
+        df.locale = locale
+        df.dateFormat = format
+        return df.string(from: date)
     }
     
     private var availableYears: [Int] {
