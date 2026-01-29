@@ -85,7 +85,7 @@ public struct WZPeriodPicker: View {
         Picker("Period Year", selection: periodYearBinding) {
             Text(allOptionText).tag(nil as Int?)
             ForEach(availableYears, id: \.self) { year in
-                Text("\(String(year))년").tag(year as Int?)
+                Text(formattedYear(year)).tag(year as Int?)
             }
         }
         .pickerStyle(.menu)
@@ -99,10 +99,31 @@ public struct WZPeriodPicker: View {
         Picker("Period Month", selection: periodMonthBinding) {
             Text(allOptionText).tag(nil as Int?)
             ForEach(availableMonths(for: periodSelectedYear), id: \.self) { month in
-                Text("\(month)월").tag(month as Int?)
+                Text(localizedMonthName(for: month)).tag(month as Int?)
             }
         }
         .pickerStyle(.menu)
+    }
+
+    // Use system locale for month names and year formatting
+    private func localizedMonthName(for month: Int) -> String {
+        let df = DateFormatter()
+        df.locale = Locale.current
+        if let symbols = df.monthSymbols {
+            let idx = month - 1
+            guard idx >= 0 && idx < symbols.count else { return String(month) }
+            return symbols[idx]
+        }
+        else {
+            return "\(month)"
+        }
+    }
+
+    private func formattedYear(_ year: Int) -> String {
+        let nf = NumberFormatter()
+        nf.locale = Locale.current
+        nf.maximumFractionDigits = 0
+        return nf.string(from: NSNumber(value: year)) ?? String(year)
     }
     
     private var availableYears: [Int] {
