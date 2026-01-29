@@ -30,6 +30,16 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 20) {
+            // System locale information
+            HStack {
+                Text("Locale: \(Locale.current.identifier)")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                Text(Locale.current.localizedString(forIdentifier: Locale.current.identifier) ?? "")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+            }
+
             VStack(spacing: 8) {
                 Text("without all selection").font(.headline)
                 Text("During : \(period1.minimum.description) ~ \(period1.maximum.description)").font(.subheadline)
