@@ -6,7 +6,7 @@
 //
 import Foundation
 
-public enum WZPeriod: Equatable {
+public enum WZYearMonth: Equatable {
     case all
     case year(Int)
     case yearMonth(year: Int, month: Int)
@@ -56,7 +56,7 @@ public enum WZPeriod: Equatable {
     }
 }
 
-public extension WZPeriod {
+public extension WZYearMonth {
     var yearComponent: Int? {
         switch self {
         case .year(let y),
@@ -86,8 +86,8 @@ public extension WZPeriod {
     }
 }
 
-public extension WZPeriod {
-    func next() -> WZPeriod {
+public extension WZYearMonth {
+    func next() -> WZYearMonth {
         switch self {
         case .all:
             return self
@@ -104,7 +104,7 @@ public extension WZPeriod {
         }
     }
 
-    func previous() -> WZPeriod {
+    func previous() -> WZYearMonth {
         switch self {
         case .all:
             return self
@@ -130,7 +130,7 @@ public enum WZPeriodGranularity {
     case month
 }
 
-public extension WZPeriod {
+public extension WZYearMonth {
     var granularity: WZPeriodGranularity {
         switch self {
         case .all:
@@ -143,8 +143,8 @@ public extension WZPeriod {
     }
 }
 
-public extension WZPeriod {
-    func isBefore(_ other: WZPeriod) -> Bool? {
+public extension WZYearMonth {
+    func isBefore(_ other: WZYearMonth) -> Bool? {
         guard granularity == other.granularity else {
             return nil
         }
@@ -162,9 +162,9 @@ public extension WZPeriod {
     }
 }
 
-public extension WZPeriod {
+public extension WZYearMonth {
 
-    func compare(_ other: WZPeriod) -> ComparisonResult? {
+    func compare(_ other: WZYearMonth) -> ComparisonResult? {
 
         // all 은 비교 대상이 아님 (정책적으로 nil)
         guard
@@ -193,38 +193,38 @@ public extension WZPeriod {
         return .orderedSame
     }
     
-    func isBefore(_ other: WZPeriod) -> Bool {
+    func isBefore(_ other: WZYearMonth) -> Bool {
         compare(other) == .orderedAscending
     }
 
-    func isAfter(_ other: WZPeriod) -> Bool {
+    func isAfter(_ other: WZYearMonth) -> Bool {
         compare(other) == .orderedDescending
     }
 }
 
 // Bounded navigation helpers (no WZYearMonth dependency required)
-public extension WZPeriod {
-    func previousWithin(rangeStart: WZPeriod, rangeEnd: WZPeriod) -> WZPeriod {
+public extension WZYearMonth {
+    func previousWithin(rangeStart: WZYearMonth, rangeEnd: WZYearMonth) -> WZYearMonth {
         let prev = previous()
         if prev == self { return self }
         if prev.isBefore(rangeStart) { return self }
         return prev
     }
 
-    func nextWithin(rangeStart: WZPeriod, rangeEnd: WZPeriod) -> WZPeriod {
+    func nextWithin(rangeStart: WZYearMonth, rangeEnd: WZYearMonth) -> WZYearMonth {
         let nxt = next()
         if nxt == self { return self }
         if nxt.isAfter(rangeEnd) { return self }
         return nxt
     }
 
-    func canMovePrevious(rangeStart: WZPeriod) -> Bool {
+    func canMovePrevious(rangeStart: WZYearMonth) -> Bool {
         let prev = previous()
         if prev == self { return false }
         return !prev.isBefore(rangeStart)
     }
 
-    func canMoveNext(rangeEnd: WZPeriod) -> Bool {
+    func canMoveNext(rangeEnd: WZYearMonth) -> Bool {
         let nxt = next()
         if nxt == self { return false }
         return !nxt.isAfter(rangeEnd)

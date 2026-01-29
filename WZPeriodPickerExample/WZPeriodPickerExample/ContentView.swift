@@ -9,11 +9,11 @@ import SwiftUI
 import WZPeriodPicker
 
 struct ContentView: View {
-    @State private var selectedPeriod = WZPeriod(yearMonth: Date())!
+    @State private var selectedPeriod = WZYearMonth(yearMonth: Date())!
     
     // 데이터 범위 설정
-    let startDate = WZPeriod(year: 2023, month: 5)
-    let endDate = WZPeriod(yearMonth: Date())!
+    let startDate = WZYearMonth(year: 2023, month: 5)
+    let endDate = WZYearMonth(yearMonth: Date())!
     
     var body: some View {
         VStack(spacing: 20) {

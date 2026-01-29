@@ -1,16 +1,16 @@
 import SwiftUI
 
 public struct WZPeriodPicker: View {
-    @Binding var selectedPeriod: WZPeriod
+    @Binding var selectedPeriod: WZYearMonth
     
-    let from: WZPeriod
-    let to: WZPeriod
+    let from: WZYearMonth
+    let to: WZYearMonth
     let allOptionText: String
     
     public init(
-        selectedPeriod: Binding<WZPeriod>,
-        from: WZPeriod,
-        to: WZPeriod,
+        selectedPeriod: Binding<WZYearMonth>,
+        from: WZYearMonth,
+        to: WZYearMonth,
         allOptionText: String = "all"
     ) {
         self._selectedPeriod = selectedPeriod
@@ -148,11 +148,11 @@ public struct WZPeriodPicker: View {
 }
 
 #Preview {
-    @Previewable @State var period: WZPeriod = .yearMonth(year: 2020, month: 10)
+    @Previewable @State var period: WZYearMonth = .yearMonth(year: 2020, month: 10)
 
     WZPeriodPicker(
         selectedPeriod: $period,
-        from: WZPeriod(year: 2020, month: 1),
-        to: WZPeriod(yearMonth: Date())!
+        from: WZYearMonth(year: 2020, month: 1),
+        to: WZYearMonth(yearMonth: Date())!
     )
 }
