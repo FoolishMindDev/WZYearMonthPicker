@@ -201,3 +201,32 @@ public extension WZPeriod {
         compare(other) == .orderedDescending
     }
 }
+
+// Bounded navigation helpers (no WZYearMonth dependency required)
+public extension WZPeriod {
+    func previousWithin(rangeStart: WZPeriod, rangeEnd: WZPeriod) -> WZPeriod {
+        let prev = previous()
+        if prev == self { return self }
+        if prev.isBefore(rangeStart) { return self }
+        return prev
+    }
+
+    func nextWithin(rangeStart: WZPeriod, rangeEnd: WZPeriod) -> WZPeriod {
+        let nxt = next()
+        if nxt == self { return self }
+        if nxt.isAfter(rangeEnd) { return self }
+        return nxt
+    }
+
+    func canMovePrevious(rangeStart: WZPeriod) -> Bool {
+        let prev = previous()
+        if prev == self { return false }
+        return !prev.isBefore(rangeStart)
+    }
+
+    func canMoveNext(rangeEnd: WZPeriod) -> Bool {
+        let nxt = next()
+        if nxt == self { return false }
+        return !nxt.isAfter(rangeEnd)
+    }
+}
