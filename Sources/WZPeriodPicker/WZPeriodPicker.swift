@@ -1,21 +1,18 @@
 import SwiftUI
 
 public struct WZPeriodPicker: View {
-    @Binding var selectedPeriod: WZYearMonth
+    @Binding var period: WZPeriod
     
-    let from: WZYearMonth
-    let to: WZYearMonth
+    var minimum : WZYearMonth { period.minimum }
+    var maxmum : WZYearMonth { period.maximum }
+    
     let allOptionText: String
     
     public init(
-        selectedPeriod: Binding<WZYearMonth>,
-        from: WZYearMonth,
-        to: WZYearMonth,
+        period: Binding<WZPeriod>,
         allOptionText: String = "all"
     ) {
-        self._selectedPeriod = selectedPeriod
-        self.from = from
-        self.to = to
+        self._period = period
         self.allOptionText = allOptionText
     }
     
@@ -34,7 +31,7 @@ public struct WZPeriodPicker: View {
     // MARK: - Period-driven bindings & pickers
 
     private var periodSelectedYear: Int? {
-        switch selectedPeriod {
+        switch period.selected {
         case .all: return nil
         case .year(let y): return y
         case .yearMonth(let y, _): return y
@@ -42,7 +39,7 @@ public struct WZPeriodPicker: View {
     }
 
     private var periodSelectedMonth: Int? {
-        switch selectedPeriod {
+        switch period.selected {
         case .yearMonth(_, let m): return m
         default: return nil
         }
@@ -53,12 +50,12 @@ public struct WZPeriodPicker: View {
             // Update period based on new year selection while preserving month when possible
             if let y = newYear {
                 if let m = periodSelectedMonth {
-                    selectedPeriod = .yearMonth(year: y, month: m)
+                    period.selected = .yearMonth(year: y, month: m)
                 } else {
-                    selectedPeriod = .year(y)
+                    period.selected = .year(y)
                 }
             } else {
-                selectedPeriod = .all
+                period.selected = .all
             }
         })
     }
@@ -68,15 +65,15 @@ public struct WZPeriodPicker: View {
             let currentYear = periodSelectedYear
             switch (currentYear, newMonth) {
             case (nil, nil):
-                selectedPeriod = .all
+                period.selected = .all
             case (let y?, nil):
-                selectedPeriod = .year(y)
+                period.selected = .year(y)
             case (let y?, let m?):
-                selectedPeriod = .yearMonth(year: y, month: m)
+                period.selected = .yearMonth(year: y, month: m)
             case (nil, let m?):
                 // no year selected but month set -> pick earliest year in range
-                let y = from.yearComponent!
-                selectedPeriod = .yearMonth(year: y, month: m)
+                let y = minimum.yearComponent!
+                period.selected = .yearMonth(year: y, month: m)
             }
         })
     }
@@ -127,32 +124,35 @@ public struct WZPeriodPicker: View {
     }
     
     private var availableYears: [Int] {
-        Array(from.yearComponent!...to.yearComponent!).reversed()
+        // TODO : minimun, maximum 이 없으면?
+        Array(minimum.yearComponent!...maxmum.yearComponent!).reversed()
     }
     
     private func availableMonths(for year: Int?) -> [Int] {
         guard let year = year else { return [] }
         
-        if let startYear = from.yearComponent, let endYear = to.yearComponent {
-            if let startMonth = from.monthComponent, let endMonth = to.monthComponent {
-                if startYear == endYear {
-                    return Array(startMonth...endMonth).reversed()
-                }
-                else {
-                    return Array(startMonth...12).reversed()
-                }
-            }
+        if year == minimum.yearComponent {
+            let startMonth = minimum.monthComponent ?? 1
+            return Array(startMonth...12).reversed()
         }
-        return []
+        
+        if year == maxmum.yearComponent {
+            let endMonth = maxmum.monthComponent ?? 12
+            return Array(1...endMonth).reversed()
+        }
+        
+        return Array(1...12).reversed()
     }
 }
 
 #Preview {
-    @Previewable @State var period: WZYearMonth = .yearMonth(year: 2020, month: 10)
-
+    @Previewable @State var period: WZPeriod = WZPeriod(
+        selected: .yearMonth(year: 2020, month: 10),
+        minimum: .yearMonth(year: 2020, month: 1),
+        maximum: .now
+    )
+        
     WZPeriodPicker(
-        selectedPeriod: $period,
-        from: WZYearMonth(year: 2020, month: 1),
-        to: WZYearMonth(yearMonth: Date())!
+        period: $period
     )
 }

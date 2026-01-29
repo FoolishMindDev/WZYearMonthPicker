@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct WZPeriodPickerExampleView: View {
-    @State private var selectedPeriod: WZYearMonth = WZYearMonth(yearMonth: Date())!
-    
-    // 데이터 범위 설정
-    let startDate = WZYearMonth(year: 2023, month: 5)
-    let endDate = WZYearMonth(yearMonth: Date())!
+    @State private var period = WZPeriod(
+        selected: .now,
+        minimum: .yearMonth(year: 2023, month: 5),
+        maximum: .now
+    )
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("\(selectedPeriod.description)")
+            Text("\(period.selected.description)")
                 .font(.headline)
             
             HStack(spacing: 15) {
@@ -31,9 +31,7 @@ struct WZPeriodPickerExampleView: View {
                 
                 // 우리가 만든 패키지 피커
                 WZPeriodPicker(
-                    selectedPeriod: $selectedPeriod,
-                    from: startDate,
-                    to: endDate
+                    period: $period,
                 )
                 
                 // 다음 달 이동 버튼
@@ -62,13 +60,11 @@ extension WZPeriodPickerExampleView {
     }
     
     private func moveToPrevious() {
-        let newPeriod = selectedPeriod.previous()
-        selectedPeriod = newPeriod
+        period.selected = period.selected.previous()
     }
     
     private func moveToNext() {
-        let newPeriod = selectedPeriod.next()
-        selectedPeriod = newPeriod
+        period.selected = period.selected.next()
     }
 }
 

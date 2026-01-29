@@ -9,17 +9,18 @@ import SwiftUI
 import WZPeriodPicker
 
 struct ContentView: View {
-    @State private var selectedPeriod = WZYearMonth(yearMonth: Date())!
-    
-    // 데이터 범위 설정
-    let startDate = WZYearMonth(year: 2023, month: 5)
-    let endDate = WZYearMonth(yearMonth: Date())!
+    @State private var period = WZPeriod(
+        selected: .now,
+        minimum: .yearMonth(year: 2023, month: 5),
+        maximum: .yearMonth(year: 2026, month: 10)
+    )
+
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("\(selectedPeriod.description)")
+            Text("\(period.selected.description)")
                 .font(.headline)
-            Text("During : \(startDate.description) ~ \(endDate.description)")
+            Text("During : \(period.minimum.description) ~ \(period.maximum.description)")
 
             
             HStack(spacing: 15) {
@@ -33,11 +34,7 @@ struct ContentView: View {
                 .disabled(!canMovePrevious)
                 
                 // WZPeriodPicker 사용
-                WZPeriodPicker(
-                    selectedPeriod: $selectedPeriod,
-                    from: startDate,
-                    to: endDate
-                )
+                WZPeriodPicker(period: $period)
                 
                 // 다음 달 이동 버튼
                 Button(action: moveToNext) {
@@ -51,25 +48,24 @@ struct ContentView: View {
             .padding()
             .background(RoundedRectangle(cornerRadius: 12).fill(Color(.systemBackground)).shadow(radius: 2))
         }
-        .padding()
     }
 }
 
 extension ContentView {
     private var canMovePrevious: Bool {
-        true
+        period.canMovePrevious()
     }
     
     private var canMoveNext: Bool {
-        true
+        period.canMoveNext()
     }
     
     private func moveToPrevious() {
-        selectedPeriod = selectedPeriod.previous()
+        period.moveToPreviousIfPossible()
     }
     
     private func moveToNext() {
-        selectedPeriod = selectedPeriod.next()
+        period.moveToNextIfPossible()
     }
 }
 

@@ -20,15 +20,15 @@ public enum WZYearMonth: Equatable {
             return nil
         }
     }
+    
+    public static var now: WZYearMonth {
+        WZYearMonth(yearMonth: Date())
+    }
 
-    public init?(yearMonth: Date) {
+    public init(yearMonth: Date) {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month], from: yearMonth)
-        if let y = components.year, let m = components.month {
-            self = .yearMonth(year: y, month: m)
-        } else {
-            return nil        
-        }
+        self = .yearMonth(year: components.year!, month: components.month!)
     }
     
     public init(year: Int?, month: Int?) {
