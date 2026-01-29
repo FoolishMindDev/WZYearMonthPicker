@@ -7,13 +7,19 @@ public struct WZPeriodPicker: View {
     var maxmum : WZYearMonth { period.maximum }
     
     let allOptionText: String
+    let allowAllPeriod: Bool
+    let allowYearAll: Bool
     
     public init(
         period: Binding<WZPeriod>,
+        allowAllPeriod: Bool = false,
+        allowYearAll: Bool = false,
         allOptionText: String = "all"
     ) {
         self._period = period
         self.allOptionText = allOptionText
+        self.allowAllPeriod = allowAllPeriod
+        self.allowYearAll = allowYearAll
     }
     
     public var body: some View {
@@ -80,7 +86,9 @@ public struct WZPeriodPicker: View {
 
     private var periodYearPicker: some View {
         Picker("Period Year", selection: periodYearBinding) {
-            Text(allOptionText).tag(nil as Int?)
+            if allowAllPeriod {
+                Text(allOptionText).tag(nil as Int?)
+            }
             ForEach(availableYears, id: \.self) { year in
                 Text(formattedYear(year)).tag(year as Int?)
             }
@@ -94,7 +102,9 @@ public struct WZPeriodPicker: View {
 
     private var periodMonthPicker: some View {
         Picker("Period Month", selection: periodMonthBinding) {
-            Text(allOptionText).tag(nil as Int?)
+            if allowYearAll {
+                Text(allOptionText).tag(nil as Int?)
+            }
             ForEach(availableMonths(for: periodSelectedYear), id: \.self) { month in
                 Text(localizedMonthName(for: month)).tag(month as Int?)
             }
