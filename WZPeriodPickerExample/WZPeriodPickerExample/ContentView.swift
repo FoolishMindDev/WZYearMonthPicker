@@ -135,7 +135,7 @@ struct ContentView: View {
             .padding()
             .background(RoundedRectangle(cornerRadius: 12).fill(Color(.systemBackground)).shadow(radius: 2))
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
     }
 }
 
