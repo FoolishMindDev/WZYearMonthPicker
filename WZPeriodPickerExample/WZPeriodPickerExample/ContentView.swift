@@ -30,12 +30,10 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            // System locale information
-            HStack {
+            Text("hello").font(.title)
+            // System locale & localization information (also printed to console)
+            VStack(alignment: .leading, spacing: 4) {
                 Text("Locale: \(Locale.current.identifier)")
-                    .font(.body)
-                    .foregroundColor(.secondary)
-                Text(Locale.current.localizedString(forIdentifier: Locale.current.identifier) ?? "")
                     .font(.body)
                     .foregroundColor(.secondary)
             }
@@ -138,6 +136,17 @@ struct ContentView: View {
             .background(RoundedRectangle(cornerRadius: 12).fill(Color(.systemBackground)).shadow(radius: 2))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear {
+            print("--- Locale debug ---")
+            print("Locale.current.identifier:", Locale.current.identifier)
+            print("Locale.current.languageCode:", Locale.current.languageCode ?? "nil")
+            print("Locale.current.regionCode:", Locale.current.regionCode ?? "nil")
+            print("Locale.preferredLanguages:", Locale.preferredLanguages)
+            print("Bundle.main.preferredLocalizations:", Bundle.main.preferredLocalizations)
+            print("Bundle.main.localizations:", Bundle.main.localizations)
+            print("CFBundleDevelopmentRegion:", Bundle.main.object(forInfoDictionaryKey: "CFBundleDevelopmentRegion") as? String ?? "nil")
+            print("---------------------")
+        }
     }
 }
 
