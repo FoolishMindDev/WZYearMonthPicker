@@ -88,6 +88,7 @@ struct ContentView: View {
                     
                     // WZPeriodPicker 사용
                     WZYearMonthPicker(period: $period2, allowAllPeriod: false, allowYearAll: true)
+                        .compactPicker()
                     
                     // 다음 달 이동 버튼
                     Button(action: { period2.moveToNextIfPossible() }) {
@@ -125,7 +126,6 @@ struct ContentView: View {
                             .foregroundStyle(.blue)
                     }
                         .font(.headline)
-                        .compactPicker()
                     
                     // 다음 달 이동 버튼
                     Button(action: { period3.moveToNextIfPossible() }) {
@@ -141,6 +141,7 @@ struct ContentView: View {
             .background(RoundedRectangle(cornerRadius: 12).fill(Color(.systemBackground)).shadow(radius: 2))
         }
         .padding()
+        .frame(maxWidth: .infinity)
     }
 }
 

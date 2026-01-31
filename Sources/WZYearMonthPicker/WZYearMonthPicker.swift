@@ -51,7 +51,7 @@ public struct WZYearMonthPicker<Emblem: View>: View {
     }
 
     public var body: some View {
-        HStack(spacing: isCompact ? 4 : 8) {
+        HStack(spacing: isCompact ? 6 : 8) {
             // optional emblem icon
             emblem()
                 .frame(width: isCompact ? 16 : 20, height: isCompact ? 16 : 20)
@@ -61,9 +61,6 @@ public struct WZYearMonthPicker<Emblem: View>: View {
             if periodSelectedYear != nil {
                 periodMonthPicker
             }
-            // single trailing chevron (one indicator for the whole control)
-            Image(systemName: "chevron.down")
-                .padding(.leading, isCompact ? 2 : 6)
         }
         .frame(maxHeight: .infinity)
     }
@@ -156,11 +153,13 @@ public struct WZYearMonthPicker<Emblem: View>: View {
                         .font(inheritedFont)
                         .lineLimit(1)
                         .minimumScaleFactor(0.6)
-                        .fixedSize(horizontal: compact, vertical: false)
+                        .fixedSize(horizontal: isCompact, vertical: false)
                 } else {
                     Text("")
                 }
-                
+                if !isCompact {
+                    Image(systemName: "chevron.down")
+                }
             }
         }
     }
@@ -201,9 +200,12 @@ public struct WZYearMonthPicker<Emblem: View>: View {
                         .font(inheritedFont)
                         .lineLimit(1)
                         .minimumScaleFactor(0.6)
-                        .fixedSize(horizontal: compact, vertical: false)
+                        .fixedSize(horizontal: isCompact, vertical: false)
                 } else {
                     Text("")
+                }
+                if !isCompact {
+                    Image(systemName: "chevron.down")
                 }                
             }
         }
@@ -212,21 +214,42 @@ public struct WZYearMonthPicker<Emblem: View>: View {
     // Use system locale for month names and year formatting
     private func localizedMonthName(for month: Int) -> String {
         guard (1...12).contains(month) else { return "\(month)" }
+        var comps = DateComponents()
+        comps.year = 2000
+        comps.month = month
+        comps.day = 1
+        let cal = Calendar.current
+        guard let date = cal.date(from: comps) else { return String(month) }
+
         let df = DateFormatter()
         df.locale = Locale.current
-        let symbols = df.standaloneMonthSymbols
-        return symbols != nil ? symbols![month - 1] : String(month)
+        df.calendar = cal
+        // For compact display prefer short form (MMM). For normal display, allow locale's preferred month format.
+        df.setLocalizedDateFormatFromTemplate(isCompact ? "MMM" : "MMMM")
+        return df.string(from: date)
     }
 
     private func formattedYear(_ year: Int) -> String {
+        let cal = Calendar.current
         var comps = DateComponents()
         comps.year = year
         comps.month = 1
-        guard let date = Calendar.current.date(from: comps) else { return String(year) }
-        let df = DateFormatter()
-        df.locale = Locale.current
-        df.setLocalizedDateFormatFromTemplate("y")
-        return df.string(from: date)
+        comps.day = 1
+        guard let date = cal.date(from: comps) else { return String(year) }
+
+        if isCompact {
+            // numeric-only respecting locale digits
+            let nf = NumberFormatter()
+            nf.locale = Locale.current
+            nf.numberStyle = .none
+            return nf.string(from: NSNumber(value: year)) ?? String(year)
+        } else {
+            let df = DateFormatter()
+            df.locale = Locale.current
+            df.calendar = cal
+            df.setLocalizedDateFormatFromTemplate("y")
+            return df.string(from: date)
+        }
     }
     
     
