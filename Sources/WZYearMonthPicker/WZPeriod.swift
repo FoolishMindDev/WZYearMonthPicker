@@ -75,3 +75,24 @@ extension WZPeriod {
     }
 }
 
+// Helper to compute available months for a given year within the period bounds
+public extension WZPeriod {
+    func availableMonths(for year: Int?) -> [Int] {
+        guard let year = year else { return [] }
+        guard let minYear = minimum.yearComponent,
+              let maxYear = maximum.yearComponent else { return [] }
+        guard year >= minYear && year <= maxYear else { return [] }
+
+        let startMonth: Int = (year == minYear) ? (minimum.monthComponent ?? 1) : 1
+        let endMonth: Int = (year == maxYear) ? (maximum.monthComponent ?? 12) : 12
+
+        guard startMonth <= endMonth else { return [] }
+        return Array(startMonth...endMonth).reversed()
+    }
+
+    var availableYears: [Int] {
+        guard let minY = minimum.yearComponent, let maxY = maximum.yearComponent else { return [] }
+        return Array(minY...maxY).reversed()
+    }
+}
+

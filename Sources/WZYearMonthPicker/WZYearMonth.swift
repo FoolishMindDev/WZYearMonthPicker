@@ -20,14 +20,21 @@ public enum WZYearMonth: Equatable {
             return nil
         }
     }
+
+    public init?(year: Int, month: Int) {
+        guard month >= 1 && month <= 12 else {
+            return nil
+        }
+        self = .yearMonth(year: year, month: month)
+    }
     
     public static var now: WZYearMonth {
-        WZYearMonth(yearMonth: Date())
+        WZYearMonth(date: Date())
     }
 
-    public init(yearMonth: Date) {
+    public init(date: Date) {
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month], from: yearMonth)
+        let components = calendar.dateComponents([.year, .month], from: date)
         self = .yearMonth(year: components.year!, month: components.month!)
     }
     

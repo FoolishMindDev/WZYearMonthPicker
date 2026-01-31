@@ -68,7 +68,7 @@ struct WZYearMonthTests {
         let cal = Calendar.current
         let date = cal.date(from: comps)!
 
-        let fromDate = WZYearMonth(yearMonth: date)
+        let fromDate = WZYearMonth(date: date)
         #expect(fromDate.yearComponent == 2001)
         #expect(fromDate.monthComponent == 7)
 

@@ -108,7 +108,7 @@ public struct WZYearMonthPicker<Emblem: View>: View {
                 }
             }
 
-            ForEach(availableYears, id: \.self) { year in
+            ForEach(period.availableYears, id: \.self) { year in
                 Button(action: { periodYearBinding.wrappedValue = year }) {
                     Text(formattedYear(year))
                         .font(inheritedFont)
@@ -152,7 +152,7 @@ public struct WZYearMonthPicker<Emblem: View>: View {
                 }
             }
 
-            ForEach(availableMonths(for: periodSelectedYear), id: \.self) { month in
+            ForEach(period.availableMonths(for: periodSelectedYear), id: \.self) { month in
                 Button(action: { periodMonthBinding.wrappedValue = month }) {
                     Text(localizedMonthName(for: month))
                         .font(inheritedFont)
@@ -201,28 +201,8 @@ public struct WZYearMonthPicker<Emblem: View>: View {
         df.setLocalizedDateFormatFromTemplate("y")
         return df.string(from: date)
     }
-
     
-
-    private var availableYears: [Int] {
-        Array(minimum.yearComponent!...maximum.yearComponent!).reversed()
-    }
-
-    private func availableMonths(for year: Int?) -> [Int] {
-        guard let year = year else { return [] }
-
-        if year == minimum.yearComponent {
-            let startMonth = minimum.monthComponent ?? 1
-            return Array(startMonth...12).reversed()
-        }
-
-        if year == maximum.yearComponent {
-            let endMonth = maximum.monthComponent ?? 12
-            return Array(1...endMonth).reversed()
-        }
-
-        return Array(1...12).reversed()
-    }
+    
 }
 
 #Preview {
