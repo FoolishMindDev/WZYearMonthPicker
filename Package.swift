@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "WZPeriodPicker",
+    name: "WZYearMonthPicker",
     platforms: [
         .iOS(.v17),
         .macOS(.v14)
@@ -12,19 +12,19 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "WZPeriodPicker",
-            targets: ["WZPeriodPicker"]
+            name: "WZYearMonthPicker",
+            targets: ["WZYearMonthPicker"]
         ),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "WZPeriodPicker"
+            name: "WZYearMonthPicker"
         ),
         .testTarget(
-            name: "WZPeriodPickerTests",
-            dependencies: ["WZPeriodPicker"]
+            name: "WZYearMonthPickerTests",
+            dependencies: ["WZYearMonthPicker"]
         ),
     ]
 )

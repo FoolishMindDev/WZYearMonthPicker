@@ -1,12 +1,12 @@
 //
 //  ContentView.swift
-//  WZPeriodPickerExample
+//  WZYearMonthPickerExample
 //
 //  Created by Jaehoon Lee on 1/29/26.
 //
 
 import SwiftUI
-import WZPeriodPicker
+import WZYearMonthPicker
 
 struct ContentView: View {
     @State private var period1 = WZPeriod(
@@ -54,7 +54,7 @@ struct ContentView: View {
                     .disabled(!period1.canMovePrevious())
                     
                     // WZPeriodPicker 사용
-                    WZPeriodPicker(period: $period1)
+                    WZYearMonthPicker(period: $period1)
                     
                     // 다음 달 이동 버튼
                     Button(action: { period1.moveToNextIfPossible() }) {
@@ -87,7 +87,7 @@ struct ContentView: View {
                     .disabled(!period2.canMovePrevious())
                     
                     // WZPeriodPicker 사용
-                    WZPeriodPicker(period: $period2, allowAllPeriod: false, allowYearAll: true)
+                    WZYearMonthPicker(period: $period2, allowAllPeriod: false, allowYearAll: true)
                     
                     // 다음 달 이동 버튼
                     Button(action: { period2.moveToNextIfPossible() }) {
@@ -120,7 +120,7 @@ struct ContentView: View {
                     .disabled(!period3.canMovePrevious())
                     
                     // WZPeriodPicker 사용
-                    WZPeriodPicker(period: $period3, allowAllPeriod: true, allowYearAll: true)
+                    WZYearMonthPicker(period: $period3, allowAllPeriod: true, allowYearAll: true)
                         .font(.headline)
                     
                     // 다음 달 이동 버튼

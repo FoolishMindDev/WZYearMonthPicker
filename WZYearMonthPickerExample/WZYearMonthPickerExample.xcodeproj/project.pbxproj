@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C8A2A102F2AC75F001C2107 /* WZPeriodPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 2C8A2A0F2F2AC75F001C2107 /* WZPeriodPicker */; };
+		2CFB079C2F2DFF6100417CE0 /* WZYearMonthPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 2CFB079B2F2DFF6100417CE0 /* WZYearMonthPicker */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2C8A29FA2F2AC2E2001C2107 /* WZPeriodPickerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WZPeriodPickerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C8A29FA2F2AC2E2001C2107 /* WZYearMonthPickerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WZYearMonthPickerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		2C8A29FC2F2AC2E2001C2107 /* WZPeriodPickerExample */ = {
+		2C8A29FC2F2AC2E2001C2107 /* WZYearMonthPickerExample */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = WZPeriodPickerExample;
+			path = WZYearMonthPickerExample;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -27,7 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C8A2A102F2AC75F001C2107 /* WZPeriodPicker in Frameworks */,
+				2CFB079C2F2DFF6100417CE0 /* WZYearMonthPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,7 +37,7 @@
 		2C8A29F12F2AC2E2001C2107 = {
 			isa = PBXGroup;
 			children = (
-				2C8A29FC2F2AC2E2001C2107 /* WZPeriodPickerExample */,
+				2C8A29FC2F2AC2E2001C2107 /* WZYearMonthPickerExample */,
 				2C8A29FB2F2AC2E2001C2107 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,7 +45,7 @@
 		2C8A29FB2F2AC2E2001C2107 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2C8A29FA2F2AC2E2001C2107 /* WZPeriodPickerExample.app */,
+				2C8A29FA2F2AC2E2001C2107 /* WZYearMonthPickerExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,9 +53,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2C8A29F92F2AC2E2001C2107 /* WZPeriodPickerExample */ = {
+		2C8A29F92F2AC2E2001C2107 /* WZYearMonthPickerExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2C8A2A052F2AC2E3001C2107 /* Build configuration list for PBXNativeTarget "WZPeriodPickerExample" */;
+			buildConfigurationList = 2C8A2A052F2AC2E3001C2107 /* Build configuration list for PBXNativeTarget "WZYearMonthPickerExample" */;
 			buildPhases = (
 				2C8A29F62F2AC2E2001C2107 /* Sources */,
 				2C8A29F72F2AC2E2001C2107 /* Frameworks */,
@@ -66,14 +66,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				2C8A29FC2F2AC2E2001C2107 /* WZPeriodPickerExample */,
+				2C8A29FC2F2AC2E2001C2107 /* WZYearMonthPickerExample */,
 			);
-			name = WZPeriodPickerExample;
+			name = WZYearMonthPickerExample;
 			packageProductDependencies = (
-				2C8A2A0F2F2AC75F001C2107 /* WZPeriodPicker */,
+				2CFB079B2F2DFF6100417CE0 /* WZYearMonthPicker */,
 			);
 			productName = WZPeriodPickerExample;
-			productReference = 2C8A29FA2F2AC2E2001C2107 /* WZPeriodPickerExample.app */;
+			productReference = 2C8A29FA2F2AC2E2001C2107 /* WZYearMonthPickerExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -91,7 +91,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2C8A29F52F2AC2E2001C2107 /* Build configuration list for PBXProject "WZPeriodPickerExample" */;
+			buildConfigurationList = 2C8A29F52F2AC2E2001C2107 /* Build configuration list for PBXProject "WZYearMonthPickerExample" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -104,14 +104,14 @@
 			mainGroup = 2C8A29F12F2AC2E2001C2107;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2C8A2A0E2F2AC75F001C2107 /* XCLocalSwiftPackageReference "../../WZPeriodPicker" */,
+				2CFB079A2F2DFF6100417CE0 /* XCLocalSwiftPackageReference "../../WZYearMonthPicker" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2C8A29FB2F2AC2E2001C2107 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2C8A29F92F2AC2E2001C2107 /* WZPeriodPickerExample */,
+				2C8A29F92F2AC2E2001C2107 /* WZYearMonthPickerExample */,
 			);
 		};
 /* End PBXProject section */
@@ -277,7 +277,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.foolishmind.sandbox.WZPeriodPickerExample;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.foolishmind.sandbox.WZYearMonthPickerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -308,7 +308,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.foolishmind.sandbox.WZPeriodPickerExample;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.foolishmind.sandbox.WZYearMonthPickerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -323,7 +323,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2C8A29F52F2AC2E2001C2107 /* Build configuration list for PBXProject "WZPeriodPickerExample" */ = {
+		2C8A29F52F2AC2E2001C2107 /* Build configuration list for PBXProject "WZYearMonthPickerExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C8A2A032F2AC2E3001C2107 /* Debug */,
@@ -332,7 +332,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2C8A2A052F2AC2E3001C2107 /* Build configuration list for PBXNativeTarget "WZPeriodPickerExample" */ = {
+		2C8A2A052F2AC2E3001C2107 /* Build configuration list for PBXNativeTarget "WZYearMonthPickerExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C8A2A062F2AC2E3001C2107 /* Debug */,
@@ -344,16 +344,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		2C8A2A0E2F2AC75F001C2107 /* XCLocalSwiftPackageReference "../../WZPeriodPicker" */ = {
+		2CFB079A2F2DFF6100417CE0 /* XCLocalSwiftPackageReference "../../WZYearMonthPicker" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../WZPeriodPicker;
+			relativePath = ../../WZYearMonthPicker;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2C8A2A0F2F2AC75F001C2107 /* WZPeriodPicker */ = {
+		2CFB079B2F2DFF6100417CE0 /* WZYearMonthPicker */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = WZPeriodPicker;
+			productName = WZYearMonthPicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

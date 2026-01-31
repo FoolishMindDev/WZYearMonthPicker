@@ -1,5 +1,5 @@
 import Testing
-@testable import WZPeriodPicker
+@testable import WZYearMonthPicker
 
 @Suite("WZPeriod 네비게이션 및 경계 테스트")
 struct WZPeriodTests {

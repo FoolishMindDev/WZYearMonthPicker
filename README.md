@@ -1,6 +1,6 @@
-# WZPeriodPicker
+# WZYearMonthPicker
 
-WZPeriodPicker is a lightweight SwiftUI period picker component.
+WZYearMonthPicker is a lightweight SwiftUI period picker component.
 
 ![Demo screenshot](Assets/screenshot.png)
 
@@ -18,7 +18,7 @@ Or add it to your `Package.swift` dependencies.
 **Quick Start**
 ```swift
 import SwiftUI
-import WZPeriodPicker
+import WZYearMonthPicker
 
 struct ExampleView: View {
   @State private var period = WZPeriod(
@@ -30,7 +30,7 @@ struct ExampleView: View {
   var body: some View {
     HStack(spacing: 15) {
       Button(action: { period.moveToPreviousIfPossible() }) { Image(systemName: "chevron.left") }
-      WZPeriodPicker(period: $period)
+      WZYearMonthPicker(period: $period)
       Button(action: { period.moveToNextIfPossible() }) { Image(systemName: "chevron.right") }
     }
   }
@@ -38,7 +38,7 @@ struct ExampleView: View {
 ```
 
 **Parameters**
-- `WZPeriodPicker(period: Binding<WZPeriod>, allowAllPeriod: Bool = false, allowYearAll: Bool = false)`
+- `WZYearMonthPicker(period: Binding<WZPeriod>, allowAllPeriod: Bool = false, allowYearAll: Bool = false)`
   - `allowAllPeriod`: Enables an "All" selection representing the entire range.
   - `allowYearAll`: Enables selecting a whole year (e.g. `2025`).
 
@@ -53,7 +53,7 @@ struct ExampleView: View {
   minimum: .yearMonth(year: 2023, month: 5),
   maximum: .yearMonth(year: 2026, month: 10)
 )
-WZPeriodPicker(period: $period1)
+WZYearMonthPicker(period: $period1)
 ```
 
 2) Allow year-only selection
@@ -63,7 +63,7 @@ WZPeriodPicker(period: $period1)
   minimum: .yearMonth(year: 2023, month: 5),
   maximum: .yearMonth(year: 2026, month: 10)
 )
-WZPeriodPicker(period: $period2, allowAllPeriod: false, allowYearAll: true)
+WZYearMonthPicker(period: $period2, allowAllPeriod: false, allowYearAll: true)
 ```
 
 3) Allow both "All" and year-only selections
@@ -73,11 +73,11 @@ WZPeriodPicker(period: $period2, allowAllPeriod: false, allowYearAll: true)
   minimum: .yearMonth(year: 2023, month: 5),
   maximum: .yearMonth(year: 2026, month: 10)
 )
-WZPeriodPicker(period: $period3, allowAllPeriod: true, allowYearAll: true)
+WZYearMonthPicker(period: $period3, allowAllPeriod: true, allowYearAll: true)
 ```
 
 **Running the example**
-- Open `WZPeriodPickerExample.xcodeproj` or the workspace in Xcode and run the example app.
+- Open `WZYearMonthPickerExample.xcodeproj` or the workspace in Xcode and run the example app.
 
 **Contributing**
 Bug reports, feature requests and pull requests are welcome.

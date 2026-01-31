@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct WZPeriodPicker: View {
+public struct WZYearMonthPicker: View {
     @Binding var period: WZPeriod
 
     @Environment(\.font) private var inheritedFont: Font?
@@ -225,7 +225,7 @@ public struct WZPeriodPicker: View {
         maximum: .now
     )
 
-    WZPeriodPicker(
+    WZYearMonthPicker(
         period: $period
     )
 }
