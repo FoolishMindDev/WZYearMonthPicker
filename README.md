@@ -46,6 +46,27 @@ struct ExampleView: View {
 - `compact` (initializer): `WZYearMonthPicker(period: ..., compact: Bool = false, ...)` — when `true` the picker renders a tighter, space-saving layout. The default is `false`.
 - `compactPicker()` (view modifier): an environment-based modifier that overrides the initializer value. Example: `WZYearMonthPicker(period: $p).compactPicker()`.
 
+### `dateRange()` API
+
+`WZYearMonth` now exposes a convenience helper to obtain an exact start/end `Date` for a period:
+
+- **Signature:** `func dateRange() -> (Date, Date)?`
+- **Behavior:**
+  - For `.year(YYYY)` returns the start of the year (YYYY-01-01 00:00:00) and the end of the year (start of next year minus 1 second).
+  - For `.yearMonth(year: YYYY, month: M)` returns the start of the month (first day 00:00:00) and the end of the month (start of next month minus 1 second).
+  - For `.all` (or if any calendar calculation fails) returns `nil`.
+- **Example:**
+
+```swift
+if let (start, end) = WZYearMonth.yearMonth(year: 2024, month: 5).dateRange() {
+  // use `start` and `end` for DB queries or filtering
+} else {
+  // treat as "all" / no bounds
+}
+```
+
+- **Migration note:** Previous convenience helpers `startDate()` and `endDate()` were removed in favor of this single, non-optional-tuple-returning API. If you previously used those, replace with `dateRange()` and unwrap the tuple.
+
 Behavior when compact is enabled:
 - Reduced horizontal spacing and smaller emblem/icon sizes.
 - Only a single trailing `chevron.down` is shown for the whole control (no repeated chevrons on each label).

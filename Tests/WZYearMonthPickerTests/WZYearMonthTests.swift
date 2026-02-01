@@ -76,4 +76,46 @@ struct WZYearMonthTests {
         let yearOnly = WZYearMonth(year: date)
         #expect(yearOnly == .year(2001))
     }
+
+    @Test("dateRange: yearMonth")
+    func testDateRangeYearMonth() {
+        let ym = WZYearMonth.yearMonth(year: 2024, month: 5)
+        let range = ym.dateRange()
+        #expect(range != nil)
+        guard let (start, end) = range else { return }
+
+        let cal = Calendar.current
+        var comps = DateComponents()
+        comps.year = 2024
+        comps.month = 5
+        comps.day = 1
+        let expectedStart = cal.startOfDay(for: cal.date(from: comps)!)
+        let startOfNextMonth = cal.startOfDay(for: cal.date(byAdding: .month, value: 1, to: expectedStart)!)
+        let expectedEnd = startOfNextMonth.addingTimeInterval(-1)
+
+        #expect(start == expectedStart)
+        #expect(end == expectedEnd)
+    }
+
+    @Test("dateRange: year")
+    func testDateRangeYear() {
+        let ym = WZYearMonth.year(2021)
+        let range = ym.dateRange()
+        #expect(range != nil)
+        guard let (start, end) = range else { return }
+
+        let cal = Calendar.current
+        let expectedStart = cal.startOfDay(for: cal.date(from: DateComponents(year: 2021, month: 1, day: 1))!)
+        let startOfNextYear = cal.startOfDay(for: cal.date(from: DateComponents(year: 2022, month: 1, day: 1))!)
+        let expectedEnd = startOfNextYear.addingTimeInterval(-1)
+
+        #expect(start == expectedStart)
+        #expect(end == expectedEnd)
+    }
+
+    @Test("dateRange: all")
+    func testDateRangeAll() {
+        let a = WZYearMonth.all
+        #expect(a.dateRange() == nil)
+    }
 }

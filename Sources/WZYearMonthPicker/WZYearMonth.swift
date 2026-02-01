@@ -189,3 +189,36 @@ public extension WZYearMonth {
         compare(other) == .orderedDescending
     }
 }
+
+extension WZYearMonth {
+    /// Returns the start and end `Date` for this period as a non-optional tuple.
+    /// Returns `nil` for `.all` or if any date calculation fails.
+    func dateRange() -> (Date, Date)? {
+        switch self {
+        case .all:
+            return nil
+        case .year(let year):
+            let calendar = Calendar.current
+            guard let startOfYear = calendar.date(from: DateComponents(year: year, month: 1, day: 1)) else {
+                return nil
+            }
+            let start = calendar.startOfDay(for: startOfYear)
+            guard let startOfNextYear = calendar.date(from: DateComponents(year: year + 1, month: 1, day: 1)) else {
+                return nil
+            }
+            let end = calendar.startOfDay(for: startOfNextYear).addingTimeInterval(-1)
+            return (start, end)
+        case .yearMonth(let year, let month):
+            let calendar = Calendar.current
+            guard let startOfMonth = calendar.date(from: DateComponents(year: year, month: month, day: 1)) else {
+                return nil
+            }
+            let start = calendar.startOfDay(for: startOfMonth)
+            guard let startOfNextMonth = calendar.date(byAdding: .month, value: 1, to: start) else {
+                return nil
+            }
+            let end = calendar.startOfDay(for: startOfNextMonth).addingTimeInterval(-1)
+            return (start, end)
+        }
+    }
+}
