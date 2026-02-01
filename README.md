@@ -50,7 +50,7 @@ struct ExampleView: View {
 
 `WZYearMonth` now exposes a convenience helper to obtain an exact start/end `Date` for a period:
 
-- **Signature:** `func dateRange() -> (Date, Date)?`
+- **Signature:** `func dateRange() -> (start: Date, end: Date)?`
 - **Behavior:**
   - For `.year(YYYY)` returns the start of the year (YYYY-01-01 00:00:00) and the end of the year (start of next year minus 1 second).
   - For `.yearMonth(year: YYYY, month: M)` returns the start of the month (first day 00:00:00) and the end of the month (start of next month minus 1 second).
@@ -58,14 +58,14 @@ struct ExampleView: View {
 - **Example:**
 
 ```swift
-if let (start, end) = WZYearMonth.yearMonth(year: 2024, month: 5).dateRange() {
-  // use `start` and `end` for DB queries or filtering
+if let range = WZYearMonth.yearMonth(year: 2024, month: 5).dateRange() {
+  // use `range.start` and `range.end` for DB queries or filtering
 } else {
   // treat as "all" / no bounds
 }
 ```
 
-- **Migration note:** Previous convenience helpers `startDate()` and `endDate()` were removed in favor of this single, non-optional-tuple-returning API. If you previously used those, replace with `dateRange()` and unwrap the tuple.
+- **Migration note:** Previous convenience helpers `startDate()` and `endDate()` were removed in favor of this single optional tuple-returning API. If you previously used those, replace with `dateRange()` and access the `start`/`end` labels or unwrap the tuple.
 
 Behavior when compact is enabled:
 - Reduced horizontal spacing and smaller emblem/icon sizes.

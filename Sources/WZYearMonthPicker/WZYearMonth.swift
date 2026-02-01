@@ -193,7 +193,7 @@ public extension WZYearMonth {
 extension WZYearMonth {
     /// Returns the start and end `Date` for this period as a non-optional tuple.
     /// Returns `nil` for `.all` or if any date calculation fails.
-    public func dateRange() -> (Date, Date)? {
+    public func dateRange() -> (start: Date, end: Date)? {
         switch self {
         case .all:
             return nil
